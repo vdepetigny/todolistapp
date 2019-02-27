@@ -23,7 +23,6 @@ before_action :authenticate_user!
   def edit
     @task = Task.find(params[:id])
     @categories = Category.all
-
   end
 
   def update
@@ -40,7 +39,12 @@ before_action :authenticate_user!
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to root_path
+    #redirect_to root_path
+    respond_to do |format|
+         format.html { redirect_to root_path }
+         format.js { render :layout => false }
+      flash[:notice] = "Task created"
+    end
   end
 
 

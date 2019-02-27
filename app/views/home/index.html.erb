@@ -7,13 +7,14 @@
   <div class="card" id="<%= category.id %>">
     <ul>
       <% category.tasks.each do |task|  %>
-      <li>
-        
-        <%= check_box_tag(:done) %>
+      <li id="<%= task.id %>">  
+        <%= check_box_tag(class: "done")  %>
         <%= task.title  %>
         <% unless task.deadline.nil? %>
-          , to read: <%= task.deadline.strftime('%D')  %>
+          , to read: <%= task.deadline.strftime('%D')  %> 
         <% end %>
+        <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'destroy' %> 
+
       </li>
       <% end %>
     </ul>
